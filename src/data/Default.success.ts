@@ -1,7 +1,7 @@
 import { IDefaultSuccess } from "../types/IDefaultSuccess";
 
 /**
- * Objeto padrao para o retorno de success dentro da aplicacao
+ * Objeto padrão para o retorno de success dentro da aplicação
 */
 const DefaultSuccess: IDefaultSuccess = {
     build: {
@@ -12,7 +12,7 @@ const DefaultSuccess: IDefaultSuccess = {
         success: "Zip gerado com sucesso!",
     },
 
-    buildAndZipSuccess: "🎉 Buil e Zip gerados com sucesso! Agora abra o seu diretorio para vizualizar o zip",
+    buildAndZipSuccess: "🎉 Build e Zip gerados com sucesso! Agora abra o seu diretório para visualizar o zip",
 
     zipMove: {
         success: "🎉 Arquivo movido com sucesso!"

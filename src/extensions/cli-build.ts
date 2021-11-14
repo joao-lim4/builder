@@ -35,8 +35,7 @@ module.exports = (toolbox: GluegunToolbox) => {
 
     /**
      * @name generateBuild 
-     * @description Gerara a build do projeto com base no gerenciador de pacotes informado pelo usuario
-     * caso o diretorio passado não seja valido, retornara um erro e o comando sera encerrado.
+     * @description Gerará a build do projeto com base no gerenciador de pacotes informado pelo usuário caso o diretório passado não seja válido, retornará um erro e o comando será encerrado.
      * 
      * @param dir string
      * @param packageManager string
@@ -54,8 +53,9 @@ module.exports = (toolbox: GluegunToolbox) => {
 
     /**
      * @name generateZip
-     * @description generateZip gera um zip do build gerado, caso nao seja possivel gerar o zip um erro sera retornado
-     * e o comando sera encerrado.
+     * @description generateZip gera um zip do build gerado, caso não seja possível gerar o zip um erro será retornado
+     * e o comando será encerrado.
+     * 
      * @param dir string
      * @param folder string
      * @returns Promise<any> 
@@ -80,8 +80,8 @@ module.exports = (toolbox: GluegunToolbox) => {
 
     /**
      * @name moveZip
-     * @description O comando moveZip ira mover o zip gerado para a dentro da pasta gerada pelo build do projeto
-     * o moveZip usa comandos nativos do sistema, para win sera usado o comando move e para o linux sera usado o 
+     * @description O comando moveZip irá mover o zip gerado para a dentro da pasta gerada pelo build do projeto
+     * o moveZip usa comandos nativos do sistema, para win será usado o comando move e para o linux será usado o
      * comando mv
      * 
      * @param command string
@@ -104,11 +104,12 @@ module.exports = (toolbox: GluegunToolbox) => {
 
     /**
      * @name startServer
-     * @description startServer ira subir um servidor http disponibilizando o zip gerado para download
-     * para baixar o zip e so fazer um GET para a rota gerada pelo ngrok passando /build.zip que o seu 
-     * zip sera baixado.
-     * No win sera aberto duas janelas onde estara rodando os servers tanto o local que usa php quanto o 
+     * @description startServer irá subir um servidor http disponibilizando o zip gerado para download
+     * para baixar o zip é só fazer um GET para a rota gerada pelo ngrok passando /build.zip que o seu
+     * zip será baixado.
+     * No win será aberto duas janelas onde estará rodando os servers tanto o local que usa php quanto o
      * server gerado pelo ngrok
+
      * 
      * @param os string
      * @param dir string
@@ -118,14 +119,7 @@ module.exports = (toolbox: GluegunToolbox) => {
      */
     async function startServer(os:string,dir:string, folder:string, port?:string):Promise<any> {
         try {
-            /**
-             * aqui eu verifico se o os e um win pois se for true irei rodar comandos diferentes
-             */
             if(os === "win32") {
-                /**
-                 * Atualmente ao passar por aqui uma nova janela é aberta contendo o conteudo do comando
-                 * mesmo assim o meu cli ainda continua trava experando que esse comando seja encerrado
-                 */
                 system.run(
                     `start /min  "" php -S localhost:${port ? port : "8000"} -t ${dir}/${folder}/ &`, 
                     {trim: true}

@@ -2,20 +2,20 @@ import { IDefaultErros } from '../types/IDefaultErros'
 
 
 /**
- * Objeto padrao para o retorno de erro dentro da aplicacao
+ * Objeto padrão para o retorno de erro dentro da aplicação
  */
 const DefaultErros: IDefaultErros = {
     validate: {
         default: {
             match: '${flag}',
             message:
-                'A flag ${flag} não foi passada, essa é flag obrigatoria. Rode builder --helpe.'
+                'A flag ${flag} não foi passada, essa é flag obrigatória. Rode builder --help.'
         }
     },
 
     build: {
         sequenceErrorBuild: {
-            spinner: "Erro ao gerar o build",
+            spinner: "Erro fatal ao gerar o build",
             sequence: [
                 "Erro ao gerar o build",
                 "---------------------------"
@@ -24,13 +24,13 @@ const DefaultErros: IDefaultErros = {
     },
 
     php: {
-        default: "Erro ao tentar subir um servidor local, não foi possivel encontrar o caminho para o binario do php",
+        default: "Erro ao tentar subir um servidor local, não foi possível encontrar o caminho para o binário do php",
         win: {
             warning: "Sugestões",
             sequence: [
-                "Rode echo $PAHT no seu CMD e verifique se o php está la.",
-                "Se não tiver nada na em seu path. tente instalar o apache por exemplo",
-                "Se ja tiver o apache, vevrifique em seus arquivos e adicione o php em seu path"
+                "Rode echo $PAHT no seu CMD e verifique se o php está lá.",
+                "Se não tiver nada na em seu path. Tente instalar o apache por exemplo",
+                "Se já tiver o apache, verifique em seus arquivos e adicione o php em seu path"
             ]
         },
         linux: {
@@ -42,7 +42,7 @@ const DefaultErros: IDefaultErros = {
     },
 
     ngrok: {
-        default: "Erro ao tentar subir um servidor local, não foi possivel encontrar o caminho para o binario do ngrok",
+        default: "Erro ao tentar subir um servidor local, não foi possível encontrar o caminho para o binário do ngrok",
         info: "Acesse o site https://ngrok.com/ e faça a instalação"
     },
 
@@ -50,7 +50,7 @@ const DefaultErros: IDefaultErros = {
         default: "Erro ao mover o arquivo, não foi possivel prosseguir com o comando!"
     },
 
-    openServe: "Erro ao subir o serivodor!"
+    openServe: "Erro ao subir o servidor!"
 }
 
 export { DefaultErros }

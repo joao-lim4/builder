@@ -5,6 +5,8 @@ import { DefaultErros } from '../data/Default.erros';
 import { BuildPanel } from '../panels/BuildLoad.panel';
 import { configSpinner } from '../data/SpinerConfig';
 import { platform } from 'os';
+import { DefaultSuccess } from '../data/Default.success';
+import { DefaultInfos } from '../data/Default.infos';
 
 
 const command: GluegunCommand = {
@@ -71,19 +73,20 @@ const command: GluegunCommand = {
         const buildInstance = await generateBuild(dir,gerenciador);
 
         if (!buildInstance.status) {
-            spinerBuildeGenerate.fail("Erro ao gerar o build");
-            error('❌ Erro ao gerar o build ❌');
-            error('---------------------------');
+            spinerBuildeGenerate.fail(DefaultErros.build.sequenceErrorBuild.spinner);
+            DefaultErros.build.sequenceErrorBuild.sequence.forEach((errorMessage) => {
+                error(errorMessage);
+            });
             error(buildInstance.content.stdout === '' ? buildInstance.content.stderr : buildInstance.content.stdout);
             return;
         }
 
-        spinerBuildeGenerate.succeed("Build finalizada!");
-        success("🎉 Build gerada com sucesso!");
+        spinerBuildeGenerate.succeed(DefaultSuccess.build.spinner);
+        success(DefaultSuccess.build.success);
 
         muted("\n");
-        info("Preparando para fazer o zip");
-        success("🚀 Zip sendo prepado");
+        info(DefaultInfos.infos.zip.preparate);
+        success(DefaultInfos.infos.zip.success);
         
         const zipSpiner = spin({
             color: 'yellow',
@@ -92,13 +95,13 @@ const command: GluegunCommand = {
         });
 
         await generateZip(dir, folder);
-        zipSpiner.succeed("Zip gerado com sucesso!");
+        zipSpiner.succeed(DefaultSuccess.zip.success);
         
-        const servidor = await confirm("Deseja subir o servidor web, possibilitando o download do zip??");
+        const servidor = await confirm(DefaultInfos.confirm.messages.servidorConfirm);
 
         if(!servidor) {
             muted("\n");
-            success("🎉 Buil e Zip gerados com sucesso! Agora abra o seu diretorio para vizualizar o zip");
+            success(DefaultSuccess.buildAndZipSuccess);
             return;
         }
 
@@ -107,24 +110,24 @@ const command: GluegunCommand = {
         const ngrok = which('ngrok');
 
         if(php === null) {
-            error("Erro ao tentar subir um servidor local, não foi possivel encontrar o caminho para o binario do php");
+            error(DefaultErros.php.default);
             if(os === "win32") {
-                warning("Sugestões")
-                info("Rode echo $PAHT no seu CMD e verifique se o php está la.")
-                info("Se não tiver nada na em seu path. tente instalar o apache por exemplo");
-                info("Se ja tiver o apache, vevrifique em seus arquivos e adicione o php em seu path");
+                warning(DefaultErros.php.win.warning);
+                DefaultErros.php.win.sequence.forEach((message) => {
+                    info(message);
+                });
                 return;
             }
 
-            warning("Sugestões")
-            info("Se não tiver o php instalado na sua maquina, tente rodar sudo apt-get install php7.4 ou a versão que você desejar");
+            warning(DefaultErros.php.linux.warning)
+            info(DefaultErros.php.linux.sequence[0]);
             return;
         }
 
         
         if(ngrok === null) {
-            error("Erro ao tentar subir um servidor local, não foi possivel encontrar o caminho para o binario do ngrok");
-            info("Acesse o site https://ngrok.com/ e faça a instalação");
+            error(DefaultErros.ngrok.default);
+            info(DefaultErros.ngrok.info);
             return;
         }
 
@@ -132,19 +135,20 @@ const command: GluegunCommand = {
     
         const move = await moveZip((os === "win32" ? 'move' : 'mv'), dir, folder);
         if(move.stderr || move.stdout) {
-            error("Erro ao mover o arquivo, não foi possivel prosseguir com o comando!");
+            error(DefaultErros.zipMoveErro.default);
             return;
         }
-        success("🎉 Arquivo movido com sucesso!");
+
+        success(DefaultSuccess.zipMove.success);
 
 
 
         const serve = await startServerPhp(os,dir,folder);
         if(serve.stderr || serve.stdout) {
-            error("Erro ao subir o serivodor.");
+            error(DefaultErros.openServe);
             return;
         }else{
-            success(`🎉 Servidor rodando! ${os === "win32" ? "Verifique as nova janelas que foram abertas!" : ""}`);
+            success(`${DefaultSuccess.server.default} ${os === "win32" ? "Verifique as nova janelas que foram abertas!" : ""}`);
         }
 
     }

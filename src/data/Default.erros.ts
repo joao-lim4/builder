@@ -1,5 +1,9 @@
 import { IDefaultErros } from '../types/IDefaultErros'
 
+
+/**
+ * Objeto padrao para o retorno de erro dentro da aplicacao
+ */
 const DefaultErros: IDefaultErros = {
     validate: {
         default: {

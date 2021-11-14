@@ -11,6 +11,13 @@ module.exports = (toolbox: GluegunToolbox) => {
         content: any
     }
 
+    /**
+     * @name runTryBuild
+     * @description Isolamento do try catch para rodar o comando que vai gerar a build
+     * 
+     * @param command string
+     * @returns Promise<Ibuilder>
+     */
     async function runTryBuild(command: string): Promise<IBuilder> {
         try {
             const builderCommand = await system.run(command, { trim: true })
@@ -26,6 +33,15 @@ module.exports = (toolbox: GluegunToolbox) => {
         }
     }
 
+    /**
+     * @name generateBuild 
+     * @description Gerara a build do projeto com base no gerenciador de pacotes informado pelo usuario
+     * caso o diretorio passado não seja valido, retornara um erro e o comando sera encerrado.
+     * 
+     * @param dir string
+     * @param packageManager string
+     * @returns 
+     */
     async function generateBuild(dir:string,packageManager: string): Promise<IBuilder> {
         const typePackageManager = packageManager.toUpperCase()
         if (typePackageManager === 'NPM') {
@@ -35,10 +51,19 @@ module.exports = (toolbox: GluegunToolbox) => {
         }
     }
 
+
+    /**
+     * @name generateZip
+     * @description generateZip gera um zip do build gerado, caso nao seja possivel gerar o zip um erro sera retornado
+     * e o comando sera encerrado.
+     * @param dir string
+     * @param folder string
+     * @returns Promise<any> 
+     */
     async function generateZip(dir: string, folder: string,): Promise<any> {
         const stream = fs.createWriteStream(`${replaceLastChar(dir, '/')}${folder}.zip`);
         const archive = create('zip', {
-            zlib: { level: 9 } // Sets the compression level.
+            zlib: { level: 9 }
         });
         
         return new Promise((resolve: any, reject) => {
@@ -53,6 +78,17 @@ module.exports = (toolbox: GluegunToolbox) => {
         });
     }
 
+    /**
+     * @name moveZip
+     * @description O comando moveZip ira mover o zip gerado para a dentro da pasta gerada pelo build do projeto
+     * o moveZip usa comandos nativos do sistema, para win sera usado o comando move e para o linux sera usado o 
+     * comando mv
+     * 
+     * @param command string
+     * @param dir string
+     * @param folder string
+     * @returns Promise
+     */
     async function moveZip(command: string, dir:string, folder:string): Promise<any> {   
         try {
             if(command === "mv") {
@@ -65,12 +101,22 @@ module.exports = (toolbox: GluegunToolbox) => {
         }
     }
 
-    // async function startNgrok(port:string) {
-    //     await system.run(`start /min  "" ngrok http 8000`, {trim: true});
-    // }
 
-
-    async function startServerPhp(os:string,dir:string, folder:string, port?:string):Promise<any> {
+    /**
+     * @name startServer
+     * @description startServer ira subir um servidor http disponibilizando o zip gerado para download
+     * para baixar o zip e so fazer um GET para a rota gerada pelo ngrok passando /build.zip que o seu 
+     * zip sera baixado.
+     * No win sera aberto duas janelas onde estara rodando os servers tanto o local que usa php quanto o 
+     * server gerado pelo ngrok
+     * 
+     * @param os string
+     * @param dir string
+     * @param folder string
+     * @param port string
+     * @returns Promise
+     */
+    async function startServer(os:string,dir:string, folder:string, port?:string):Promise<any> {
         try {
             /**
              * aqui eu verifico se o os e um win pois se for true irei rodar comandos diferentes
@@ -108,5 +154,5 @@ module.exports = (toolbox: GluegunToolbox) => {
     toolbox.generateBuild = (dir: string, packageManager: string): Promise<IBuilder> => generateBuild(dir,packageManager);
     toolbox.generateZip = (dir: string, folder: string): Promise<any> => generateZip(dir,folder);
     toolbox.moveZip = (command: string,dir: string, folder: string): Promise<any> =>  moveZip(command, dir,folder);
-    toolbox.startServerPhp = (os:string,dir:string, folder:string,port?:string): Promise<any> =>  startServerPhp(os,dir,folder,port);
+    toolbox.startServer = (os:string,dir:string, folder:string,port?:string): Promise<any> =>  startServer(os,dir,folder,port);
 }

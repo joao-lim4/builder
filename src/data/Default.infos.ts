@@ -1,5 +1,8 @@
 import { IDefaultInfo } from "../types/IDefaultInfos";
 
+/**
+ * Objeto padrao para o retorno de infos dentro da aplicacao
+ */
 const DefaultInfos: IDefaultInfo = {
     confirm: {
         messages: {

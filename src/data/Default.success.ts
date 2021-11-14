@@ -1,5 +1,8 @@
 import { IDefaultSuccess } from "../types/IDefaultSuccess";
 
+/**
+ * Objeto padrao para o retorno de success dentro da aplicacao
+*/
 const DefaultSuccess: IDefaultSuccess = {
     build: {
         spinner: "Build finalizada!",

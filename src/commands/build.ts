@@ -12,7 +12,7 @@ import { DefaultInfos } from '../data/Default.infos';
 const command: GluegunCommand = {
     name: 'builder',
     description:
-        'Builder aplication flags -s<enable server aplication using ngrok> -g<genreciador de pacote> --dir<directory onde esta o projeto> --folder< pasta para onde vai o depois que o build é gerado >',
+        'Builder options --dir<directory onde esta o projeto> --folder< pasta para onde vai o depois que o build é gerado >',
     run: async toolbox => {
         const {
             print: { error, success,muted, spin, info, warning },
@@ -27,6 +27,10 @@ const command: GluegunCommand = {
 
         const os = platform();
 
+        /**
+         * valida se foi passada as option nescessarias para o comando rodar corretamente
+         * nesse caso ira validar --dir --folder
+         */
         const validates = useValidateObject([
             {
                 match: 'dir',
@@ -55,6 +59,10 @@ const command: GluegunCommand = {
 
         const { dir,folder } = options;
         
+
+        /**
+         * Pergunta qual gerenciador de pacotes ele quer usar, Yarn | Npm
+        */
         const { gerenciador } = await ask([{
             type: 'select',
             name: 'gerenciador',
@@ -70,8 +78,15 @@ const command: GluegunCommand = {
             text: "Gerando o build"
         });
 
+        /**
+         * Entra no diretorio informado e gera o build do projeto se der error a prop status vai vir como false
+         * caso contrario o build e gerado com sucesso
+         */
         const buildInstance = await generateBuild(dir,gerenciador);
 
+        /**
+         * Erro ao gerar o build, retornara um erro ao usuario e finalizara o comando
+         */
         if (!buildInstance.status) {
             spinerBuildeGenerate.fail(DefaultErros.build.sequenceErrorBuild.spinner);
             DefaultErros.build.sequenceErrorBuild.sequence.forEach((errorMessage) => {
@@ -94,9 +109,17 @@ const command: GluegunCommand = {
             spinner: configSpinner.dots
         });
 
+        /**
+         * Gera o zip usando a lib archiver, possibilidades de implementar o zip padrão caso o usuario tenha 
+         * o comando zip instalado em seu sistema.
+        */
         await generateZip(dir, folder);
         zipSpiner.succeed(DefaultSuccess.zip.success);
         
+
+        /**
+         * Pergunta se o usuario quer subir um servidor http possibilitando baixar o zip gerado
+        */
         const servidor = await confirm(DefaultInfos.confirm.messages.servidorConfirm);
 
         if(!servidor) {
@@ -106,6 +129,10 @@ const command: GluegunCommand = {
         }
 
 
+        /**
+         * Para subir o servidor e preciso ter o php e o ngrok instalado no sistema, caso o 
+         * usuario nao tenha, retornara um erro e o comando sera encerrado.
+         */
         const php = which('php');
         const ngrok = which('ngrok');
 
@@ -142,7 +169,9 @@ const command: GluegunCommand = {
         success(DefaultSuccess.zipMove.success);
 
 
-
+        /**
+         * Subira um servidor http na porta 8000
+         */
         const serve = await startServerPhp(os,dir,folder);
         if(serve.stderr || serve.stdout) {
             error(DefaultErros.openServe);

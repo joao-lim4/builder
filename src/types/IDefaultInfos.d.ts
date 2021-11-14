@@ -1,4 +1,3 @@
-
 interface IConfirmMessages {
     confirm: {
         messages: {
@@ -10,13 +9,12 @@ interface IConfirmMessages {
 interface IInfosMessages {
     infos: {
         zip: {
-            preparate: string,
-            success:  string
+            preparate: string
+            success: string
         }
     }
 }
 
 interface IDefaultInfo extends IConfirmMessages, IInfosMessages {}
 
-
-export { IDefaultInfo };
+export { IDefaultInfo }

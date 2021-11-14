@@ -1,26 +1,25 @@
-
 interface IBuildSuccess {
     build: {
-        spinner: string,
+        spinner: string
         success: string
     }
 }
 
 interface IZipSuccess {
     zip: {
-        success: string,
+        success: string
     }
 }
 
 interface IMoveSuccess {
     zipMove: {
-        success: string,
+        success: string
     }
 }
 
 interface ISuccessMessages {
     buildAndZipSuccess: string
-}   
+}
 
 interface IServerSuccess {
     server: {
@@ -28,7 +27,11 @@ interface IServerSuccess {
     }
 }
 
-interface IDefaultSuccess extends IBuildSuccess, IZipSuccess, ISuccessMessages, IMoveSuccess, IServerSuccess {}
+interface IDefaultSuccess
+    extends IBuildSuccess,
+        IZipSuccess,
+        ISuccessMessages,
+        IMoveSuccess,
+        IServerSuccess {}
 
-
-export { IDefaultSuccess };
+export { IDefaultSuccess }

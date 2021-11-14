@@ -4,15 +4,15 @@
  *
  * @param match string
  * @param valueReplace string
- * @param string string
+ * @param str string
  * @returns string
  */
 const replaceString = (
     match: string,
     valueReplace: string,
-    string: string
+    str: string
 ): string | undefined => {
-    if (string.length) return string.replace(match, valueReplace)
+    if (str.length) return str.replace(match, valueReplace)
     return undefined
 }
 

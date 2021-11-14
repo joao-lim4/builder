@@ -34,9 +34,9 @@ module.exports = (toolbox: GluegunToolbox) => {
     }
 
     /**
-     * @name generateBuild 
+     * @name generateBuild
      * @description Gerará a build do projeto com base no gerenciador de pacotes informado pelo usuário caso o diretório passado não seja válido, retornará um erro e o comando será encerrado.
-     * 
+     *
      * @param dir string
      * @param packageManager string
      * @returns
@@ -57,7 +57,7 @@ module.exports = (toolbox: GluegunToolbox) => {
      * @name generateZip
      * @description generateZip gera um zip do build gerado, caso não seja possível gerar o zip um erro será retornado
      * e o comando será encerrado.
-     * 
+     *
      * @param dir string
      * @param folder string
      * @returns Promise<any>
@@ -77,7 +77,7 @@ module.exports = (toolbox: GluegunToolbox) => {
                 .pipe(stream)
 
             stream.on('close', () => resolve())
-            archive.finalize()
+            archive.finalize().catch(() => false)
         })
     }
 
@@ -123,7 +123,7 @@ module.exports = (toolbox: GluegunToolbox) => {
      * zip será baixado.
      * No win será aberto duas janelas onde estará rodando os servers tanto o local que usa php quanto o
      * server gerado pelo ngrok
-     * 
+     *
      * @param os string
      * @param dir string
      * @param folder string
@@ -137,30 +137,35 @@ module.exports = (toolbox: GluegunToolbox) => {
         port?: string
     ): Promise<any> {
         try {
-            if(os === "win32") {
-                system.run(
-                    `start /min  "" php -S localhost:${
-                        port ? port : '8000'
-                    } -t ${dir}/${folder}/ &`,
-                    { trim: true }
-                )
+            if (os === 'win32') {
+                system
+                    .run(
+                        `start /min  "" php -S localhost:${
+                            port ? port : '8000'
+                        } -t ${dir}/${folder}/ &`,
+                        { trim: true }
+                    )
+                    .catch(() => false)
 
-                system.run(`start /min "" ngrok http 8000`)
+                system.run(`start /min "" ngrok http 8000`).catch(() => false)
 
                 return true
             }
 
-            system.run(
-                `php -S localhost:${port ? port : '8000'} -t ${dir}/${folder}/ &
+            system
+                .run(
+                    `php -S localhost:${
+                        port ? port : '8000'
+                    } -t ${dir}/${folder}/ &
                 `,
-                { trim: true }
-            )
+                    { trim: true }
+                )
+                .catch(() => false)
 
-            system.run('ngrok http 8000')
+            system.run('ngrok http 8000').catch(() => false)
 
             return true
         } catch (error) {
-            console.log(error)
             return error
         }
     }

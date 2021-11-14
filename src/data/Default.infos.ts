@@ -1,7 +1,7 @@
 import { IDefaultInfo } from "../types/IDefaultInfos";
 
 /**
- * Objeto padrao para o retorno de infos dentro da aplicacao
+ * Objeto padrão para o retorno de infos dentro da aplicação
  */
 const DefaultInfos: IDefaultInfo = {
     confirm: {
@@ -13,7 +13,7 @@ const DefaultInfos: IDefaultInfo = {
     infos: {
         zip: {
             preparate: "Preparando para fazer o zip",
-            success: "🚀 Zip sendo prepado"
+            success: "🚀 Zip sendo preparado"
         }
     }
 }

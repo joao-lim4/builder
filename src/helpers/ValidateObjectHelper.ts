@@ -9,6 +9,15 @@ interface IValidateType {
     messageError?: string
 }
 
+/**
+ * @name useValidateObject
+ * @description Valida um array de objeto do tipo IValidateType retornando um array de erros caso não tenha
+ * dado match com alguma key do objeto passado.
+ * 
+ * @param validates array 
+ * @returns array
+ */
+
 const useValidateObject = (
     validates: Array<IValidateType>
 ): Array<IErrorValidate> => {

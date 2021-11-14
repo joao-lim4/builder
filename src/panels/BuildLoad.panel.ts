@@ -1,7 +1,9 @@
 import { print } from "gluegun";
 
 
-
+/**
+ * Retorna o painel de buil
+ */
 const BuildPanel = () => {
     const { success, muted, highlight } = print;
     success("Build iniciado!! 🚀🚀");

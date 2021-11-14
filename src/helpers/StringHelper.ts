@@ -1,9 +1,9 @@
 /**
  * @name replaceString
  * @description String.replace do javascript kkkkk não lembro por qual motivo eu fiz isso
- * 
+ *
  * @param match string
- * @param valueReplace string 
+ * @param valueReplace string
  * @param string string
  * @returns string
  */
@@ -17,32 +17,30 @@ const replaceString = (
 }
 
 /**
- * 
+ *
  * @name replaceLastChar
  * @description troca o ultimo caractere de um string pelo caractere passado.
  * exemplo str='projects/data' char='/' macth='/' return='projects/data/';
- * 
+ *
  * @param str string
  * @param char string
  * @param match string
  * @returns string
  */
-const replaceLastChar = (str:string, char: string, match?: string):string => {
-    if(str[str.length - 1] === (match ? match : char)) return str;
-    return `${str}${char}`;
+const replaceLastChar = (str: string, char: string, match?: string): string => {
+    if (str[str.length - 1] === (match ? match : char)) return str
+    return `${str}${char}`
 }
- 
+
 /**
  * @name replaceBars
  * @description troca todas as / de uma string por //\\
- * 
+ *
  * @param str string
  * @returns string
  */
 const replaceBars = (str: string): string => {
-    return str.replace('/', `//\\`);
+    return str.replace('/', `//\\`)
 }
 
-export { replaceString, replaceLastChar, replaceBars };
-
-
+export { replaceString, replaceLastChar, replaceBars }

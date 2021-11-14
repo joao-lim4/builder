@@ -1,6 +1,6 @@
-import { build } from 'gluegun';
-import { Toolbox } from 'gluegun/build/types/domain/toolbox';
-import { Help } from './helpers/commands/Help';
+import { build } from 'gluegun'
+import { Toolbox } from 'gluegun/build/types/domain/toolbox'
+import { Help } from './helpers/commands/Help'
 
 /**
  * Create the cli and kick it off
@@ -17,7 +17,7 @@ async function run(argv) {
             alias: 'h',
             hidden: true,
             dashed: true,
-            run: (toolbox:Toolbox) => Help(toolbox)
+            run: (toolbox: Toolbox) => Help(toolbox)
         }) // provides default for help, h, --help, -h
         .version()
         .create()

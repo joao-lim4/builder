@@ -9,13 +9,13 @@ interface IValidateMessage {
 
 interface IPhpNotFound {
     php: {
-        default: string,
+        default: string
         win: {
-            warning: string,
+            warning: string
             sequence: Array<string>
         }
         linux: {
-            warning: string,
+            warning: string
             sequence: Array<string>
         }
     }
@@ -23,8 +23,8 @@ interface IPhpNotFound {
 
 interface INgrokNotFound {
     ngrok: {
-        default: string,
-        info: string,
+        default: string
+        info: string
     }
 }
 
@@ -36,26 +36,24 @@ interface IMoveZipError {
     }
 }
 
-
 interface IBuildErrorMessage {
     build: {
         sequenceErrorBuild: {
-            spinner: string,
+            spinner: string
             sequence: Array<string>
         }
     }
 }
 
 interface IServidorError {
-    openServe: string,
+    openServe: string
 }
 
-interface IDefaultErros extends 
-    IValidateMessage, 
-    IBuildErrorMessage, 
-    ICommandsNotFound, 
-    IMoveZipError,
-    IServidorError
-{}
+interface IDefaultErros
+    extends IValidateMessage,
+        IBuildErrorMessage,
+        ICommandsNotFound,
+        IMoveZipError,
+        IServidorError {}
 
 export { IDefaultErros }

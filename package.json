@@ -1,6 +1,6 @@
 {
     "name": "builder",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "builder CLI",
     "private": true,
     "types": "build/types/types.d.ts",

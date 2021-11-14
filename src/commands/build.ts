@@ -11,7 +11,7 @@ import { DefaultInfos } from '../data/Default.infos'
 const command: GluegunCommand = {
     name: 'builder',
     description:
-        'Builder options --dir<directory onde esta o projeto> --folder< pasta para onde vai o depois que o build é gerado >',
+        'Builder options --dir< diretório onde está o projeto > --folder< para que é gerada pela build >',
     run: async toolbox => {
         const {
             print: { error, success, muted, spin, info, warning },

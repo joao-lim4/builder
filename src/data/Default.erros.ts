@@ -27,7 +27,7 @@ const DefaultErros: IDefaultErros = {
             sequence: [
                 'Rode echo $PAHT no seu CMD e verifique se o php está la.',
                 'Se não tiver nada na em seu path. tente instalar o apache por exemplo',
-                'Se ja tiver o apache, vevrifique em seus arquivos e adicione o php em seu path'
+                'Se ja tiver o apache, verifique em seus arquivos e adicione o php em seu path'
             ]
         },
         linux: {

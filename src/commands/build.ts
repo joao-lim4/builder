@@ -20,7 +20,7 @@ const command: GluegunCommand = {
             generateBuild,
             generateZip,
             moveZip,
-            startServerPhp,
+            startServer,
             system: { which }
         } = toolbox
 
@@ -176,10 +176,10 @@ const command: GluegunCommand = {
         /*
          * Subira um servidor http na porta 8000
          */
-        const serve = await startServerPhp(os, dir, folder)
+        const serve = await startServer(os, dir, folder)
         if (serve.stderr || serve.stdout) {
             error(DefaultErros.openServe)
-            return
+            return;
         } else {
             success(
                 `${DefaultSuccess.server.default} ${

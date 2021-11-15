@@ -14,7 +14,7 @@ const DefaultInfos: IDefaultInfo = {
     infos: {
         zip: {
             preparate: 'Preparando para fazer o zip',
-            success: '🚀 Zip sendo prepado'
+            success: '🚀 Zip sendo preparado'
         }
     }
 }

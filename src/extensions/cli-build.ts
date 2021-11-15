@@ -152,17 +152,14 @@ module.exports = (toolbox: GluegunToolbox) => {
                 return true
             }
 
+            if(system.which("gnome-terminal") === null) return { stderr: `O caminho para gnome-terminal não foi encontrado, para vizualizar o zip gerado abra ${replaceLastChar(dir,"/", "/")}${folder}` };
             system
-                .run(
-                    `php -S localhost:${
-                        port ? port : '8000'
-                    } -t ${dir}/${folder}/ &
-                `,
+                .run(`gnome-terminal --tab --title="PHP Local Server" --command="bash -c 'php -S localhost:${ port ? port : '8000'} -t ${replaceLastChar(dir,"/", "/")}${folder}/'; $SHELL"`,
                     { trim: true }
                 )
                 .catch(() => false)
 
-            system.run('ngrok http 8000').catch(() => false)
+            system.run(`gnome-terminal --tab --title="PHP Local Server" --command="bash -c 'ngrok http 8000'; $SHELL"`).catch(() => false)
 
             return true
         } catch (error) {

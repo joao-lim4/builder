@@ -184,8 +184,8 @@ const command: GluegunCommand = {
             success(
                 `${DefaultSuccess.server.default} ${
                     os === 'win32'
-                        ? 'Verifique as nova janelas que foram abertas!'
-                        : ''
+                        ? 'Verifique as novas janelas que foram abertas!'
+                        : 'Verifique as novas abas que forma abertas em seu terminal!'
                 }`
             )
         }

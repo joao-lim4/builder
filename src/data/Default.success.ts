@@ -12,7 +12,7 @@ const DefaultSuccess: IDefaultSuccess = {
         success: 'Zip gerado com sucesso!'
     },
     buildAndZipSuccess:
-        '🎉 Buil e Zip gerados com sucesso! Agora abra o seu diretorio para vizualizar o zip',
+        '🎉 Build e Zip gerados com sucesso! Agora abra o seu diretório para visualizar o zip',
 
     zipMove: {
         success: '🎉 Arquivo movido com sucesso!'

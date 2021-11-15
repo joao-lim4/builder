@@ -21,13 +21,13 @@ const DefaultErros: IDefaultErros = {
 
     php: {
         default:
-            'Erro ao tentar subir um servidor local, não foi possivel encontrar o caminho para o binario do php',
+            'Erro ao tentar subir um servidor local, não foi possível encontrar o caminho para o binário do php',
         win: {
             warning: 'Sugestões',
             sequence: [
                 'Rode echo $PAHT no seu CMD e verifique se o php está la.',
                 'Se não tiver nada na em seu path. tente instalar o apache por exemplo',
-                'Se ja tiver o apache, verifique em seus arquivos e adicione o php em seu path'
+                'Se já tiver o apache, verifique em seus arquivos e adicione o php em seu path'
             ]
         },
         linux: {
@@ -40,16 +40,16 @@ const DefaultErros: IDefaultErros = {
 
     ngrok: {
         default:
-            'Erro ao tentar subir um servidor local, não foi possivel encontrar o caminho para o binario do ngrok',
+            'Erro ao tentar subir um servidor local, não foi possível encontrar o caminho para o binário do ngrok!',
         info: 'Acesse o site https://ngrok.com/ e faça a instalação'
     },
 
     zipMoveErro: {
         default:
-            'Erro ao mover o arquivo, não foi possivel prosseguir com o comando!'
+            'Erro ao mover o arquivo, não foi possível prosseguir com o comando!'
     },
 
-    openServe: 'Erro ao subir o serivodor!'
+    openServe: 'Erro ao subir o serividor!'
 }
 
 export { DefaultErros }

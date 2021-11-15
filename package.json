@@ -1,6 +1,6 @@
 {
     "name": "builder-prl",
-    "version": "0.0.2",
+    "version": "0.0.31",
     "description": "builder CLI",
     "types": "build/types/types.d.ts",
     "bin": {

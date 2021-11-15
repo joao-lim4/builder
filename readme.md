@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/joao-lim4">
-        <img src="./logo.png" alt="Logo" width="150">
+        <img src="https://i.ibb.co/k00WVgN/logo.png" alt="Logo" width="150">
     </a>
     <br/>
     <h3 align="center">CLI Para gerar builds automaticamente de projetos node</h3>

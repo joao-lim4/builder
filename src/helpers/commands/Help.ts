@@ -24,6 +24,9 @@ const Help = (toolbox: Toolbox): void => {
     muted(
         '        --folder <Obrigatório> a option --folder significa o diretório gerado ao executar o build, por exemplo no react ao rodar yarn build, um diretório chamado build é gerado na raiz do meu projeto.'
     )
+    muted(
+        '        --port <Não obrigatório> a option --port especifica a porta onde o seu servidor local ira rodar, a porta padrão é 8000'
+    )
     muted('\n')
 }
 

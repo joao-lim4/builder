@@ -56,7 +56,7 @@ const command: GluegunCommand = {
             return
         }
 
-        const { dir, folder } = options
+        const { dir, folder, port } = options
 
         /*
          * Pergunta qual gerenciador de pacotes ele quer usar, Yarn | Npm
@@ -176,10 +176,10 @@ const command: GluegunCommand = {
         /*
          * Subira um servidor http na porta 8000
          */
-        const serve = await startServer(os, dir, folder)
+        const serve = await startServer(os, dir, folder,port)
         if (serve.stderr || serve.stdout) {
             error(DefaultErros.openServe)
-            return;
+            return
         } else {
             success(
                 `${DefaultSuccess.server.default} ${

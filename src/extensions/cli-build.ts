@@ -147,7 +147,9 @@ module.exports = (toolbox: GluegunToolbox) => {
                     )
                     .catch(() => false)
 
-                system.run(`start /min "" ngrok http ${port ? port : 8000}`).catch(() => false)
+                system
+                    .run(`start /min "" ngrok http ${port ? port : 8000}`)
+                    .catch(() => false)
 
                 return true
             }
@@ -173,7 +175,9 @@ module.exports = (toolbox: GluegunToolbox) => {
 
             system
                 .run(
-                    `gnome-terminal --tab --title="PHP Local Server" --command="bash -c 'ngrok http ${port ? port : 8000}'; $SHELL"`
+                    `gnome-terminal --tab --title="PHP Local Server" --command="bash -c 'ngrok http ${
+                        port ? port : 8000
+                    }'; $SHELL"`
                 )
                 .catch(() => false)
 

@@ -35,10 +35,8 @@
     Segue o link para instalar o NGROK https://ngrok.com/download
 
 ### Instalação
-
-1. Instale usando npm ou yarn
 ```sh
-    npm install -g builder-prl
+npm install -g builder-prl
 ```
 
 

@@ -176,7 +176,7 @@ const command: GluegunCommand = {
         /*
          * Subira um servidor http na porta 8000
          */
-        const serve = await startServer(os, dir, folder,port)
+        const serve = await startServer(os, dir, folder, port)
         if (serve.stderr || serve.stdout) {
             error(DefaultErros.openServe)
             return
